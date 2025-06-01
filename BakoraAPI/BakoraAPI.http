@@ -1,0 +1,6 @@
+@BakoraAPI_HostAddress = http://localhost:5141
+
+GET {{BakoraAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

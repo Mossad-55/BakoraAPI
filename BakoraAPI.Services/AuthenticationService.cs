@@ -5,6 +5,7 @@ using BakoraAPI.Services.Contracts;
 using BakoraAPI.Services.MappingProfiles;
 using BakoraAPI.Shared.DTOs.Admin;
 using BakoraAPI.Shared.DTOs.Provider;
+using BakoraAPI.Shared.DTOs.Requester;
 using BakoraAPI.Shared.DTOs.UserDTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -122,7 +123,7 @@ internal sealed class AuthenticationService : IAuthenticationService
 
         await _userManager.AddToRoleAsync(userModel, dto.Role);
 
-        _services.AdminService.CreateAsync(userModel.Id, false);
+        await _services.AdminService.CreateAsync(userModel.Id, false);
 
         return result;
     }
@@ -145,11 +146,32 @@ internal sealed class AuthenticationService : IAuthenticationService
 
         await _userManager.AddToRoleAsync(userModel, dto.Role);
 
-        _services.ProviderService.CreateProviderAsync(userModel.Id, dto, false);
+        await _services.ProviderService.CreateProviderAsync(userModel.Id, dto, false);
 
         return result;
     }
 
+    public async Task<IdentityResult> RegisterRequesterAsync(RequesterRegisterDto dto)
+    {
+        var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+        if (existingUser != null)
+            throw new EmailExistsException(dto.Email);
+
+        if (!await _roleManager.RoleExistsAsync(dto.Role))
+            throw new UserRoleNotFoundException(dto.Role);
+
+        var userModel = dto.ToUserEntity();
+
+        var result = await _userManager.CreateAsync(userModel, dto.Password);
+        if (!result.Succeeded)
+            return result;
+
+        await _userManager.AddToRoleAsync(userModel, dto.Role);
+
+        await _services.RequesterService.CreateAsnyc(userModel.Id, dto, false);
+
+        return result;
+    }
 
     public async Task<IdentityResult> UpdateAdminAsync(AdminUpdateDto dto)
     {
@@ -170,6 +192,19 @@ internal sealed class AuthenticationService : IAuthenticationService
         userEntity.UpdateEntity(dto);
 
         await _services.ProviderService.UpdateProviderAsync(Guid.Parse(dto.UserId), dto, true);
+
+        var result = await _userManager.UpdateAsync(userEntity);
+
+        return result;
+    }
+
+    public async Task<IdentityResult> UpdateRequesterAsync(RequesterUpdateDto dto)
+    {
+        var userEntity = await _userManager.FindByIdAsync(dto.UserId) ?? throw new UserNotFoundException(Guid.Parse(dto.UserId));
+
+        userEntity.UpdateEntity(dto);
+
+        await _services.RequesterService.UpdateAsync(Guid.Parse(dto.UserId), dto, true);
 
         var result = await _userManager.UpdateAsync(userEntity);
 

@@ -2,6 +2,7 @@
 using BakoraAPI.Services.Contracts;
 using BakoraAPI.Shared.DTOs.Admin;
 using BakoraAPI.Shared.DTOs.Provider;
+using BakoraAPI.Shared.DTOs.Requester;
 using BakoraAPI.Shared.DTOs.UserDTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -105,7 +106,7 @@ public class AuthenticationController : ControllerBase
         return StatusCode(201, new { message = "Registration successful. Please login to your account." });
     }
 
-    /*[HttpPost("register-requester")]
+    [HttpPost("register-requester")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> RegisterRequester([FromForm] RequesterRegisterDto dto)
     {
@@ -137,7 +138,7 @@ public class AuthenticationController : ControllerBase
         }
 
         return StatusCode(201, new { message = "Registration successful. Please login to your account." });
-    }*/
+    }
 
     [HttpPut("update-admin")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
@@ -208,6 +209,49 @@ public class AuthenticationController : ControllerBase
         }
 
         var result = await _authService.AuthenticationService.UpdateProviderAsync(dto);
+        if (!result.Succeeded)
+        {
+            // If user creation fails, delete the uploaded profile picture if it exists
+            if (!string.IsNullOrEmpty(dto.ProfilePictureUrl))
+            {
+                _fileService.DeleteFile(dto.ProfilePictureUrl);
+            }
+
+            foreach (var error in result.Errors)
+                ModelState.TryAddModelError(error.Code, error.Description);
+
+            return BadRequest(ModelState);
+        }
+
+        return NoContent();
+    }
+
+    [HttpPut("update-requester")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> UpdateRequester([FromForm] RequesterUpdateDto dto)
+    {
+        // Handling Profile Picture Upload
+        if (dto.ProfilePicture != null)
+        {
+            try
+            {
+                if (dto.ProfilePictureUrl != null)
+                    _fileService.DeleteFile(dto.ProfilePictureUrl);
+
+                dto.ProfilePictureUrl = await _fileService.SaveFileAsync(dto.ProfilePicture);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { message = ex.Message });
+            }
+        }
+        else if (dto.ProfilePicture == null && string.IsNullOrEmpty(dto.ProfilePictureUrl))
+        {
+            _fileService.DeleteFile(dto.ProfilePictureUrl ?? string.Empty);
+            dto.ProfilePictureUrl = string.Empty;
+        }
+
+        var result = await _authService.AuthenticationService.UpdateRequesterAsync(dto);
         if (!result.Succeeded)
         {
             // If user creation fails, delete the uploaded profile picture if it exists

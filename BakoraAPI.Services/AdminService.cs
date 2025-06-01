@@ -14,7 +14,7 @@ internal sealed class AdminService : IAdminService
     public AdminService(IRepositoryManager repository) => _repository = repository; 
 
 
-    public void CreateAsync(Guid userId, bool trackChanges)
+    public async Task CreateAsync(Guid userId, bool trackChanges)
     {
         var admin = new Admin
         {
@@ -23,7 +23,7 @@ internal sealed class AdminService : IAdminService
 
         _repository.Admin.CreateAdminAsync(admin);
 
-        _repository.SaveChanges();
+        await _repository.SaveChanges();
     }
 
     public async Task<IEnumerable<AdminDto?>> GetAllAsync(bool trackChanges)

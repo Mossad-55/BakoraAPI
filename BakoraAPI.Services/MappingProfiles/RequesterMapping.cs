@@ -26,8 +26,8 @@ public static class RequesterMapping
 
         requester.InstitutionTypeEn = dto.InstitutionTypeEn ?? requester.InstitutionTypeEn;
         requester.InstitutionTypeAr = dto.InstitutionTypeAr ?? requester.InstitutionTypeAr;
-        requester.CommercialRegistrationDate = dto.CommercialRegistrationDate ?? provider.CommercialRegistrationDate;
-        requester.CommercialRegistrationNumber = dto.CommercialRegistrationNumber ?? provider.CommercialRegistrationNumber;
+        requester.CommercialRegistrationDate = dto.CommercialRegistrationDate ?? requester.CommercialRegistrationDate;
+        requester.CommercialRegistrationNumber = dto.CommercialRegistrationNumber ?? requester.CommercialRegistrationNumber;
         requester.InstitutionNameEn = dto.InstitutionNameEn ?? requester.InstitutionNameEn;
         requester.InstitutionNameAr = dto.InstitutionNameAr ?? requester.InstitutionNameAr;
     }

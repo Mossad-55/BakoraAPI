@@ -6,6 +6,7 @@ public interface IRepositoryManager
     IAdminRepository Admin { get; }
     IProviderRepository Provider { get; }
     IRequesterRepository Requester { get; }
+    IServiceRepository Service { get; }
         
     Task SaveChanges();
 }

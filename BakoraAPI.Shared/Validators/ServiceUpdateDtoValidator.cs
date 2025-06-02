@@ -24,9 +24,5 @@ public class ServiceUpdateDtoValidator : AbstractValidator<ServiceUpdateDto>
         RuleFor(x => x.DescriptionEn)
             .NotEmpty()
             .WithMessage(localizer["ServiceDescriptionEn"]);
-
-        RuleFor(x => x.Id)
-            .NotEmpty()
-            .WithMessage(localizer["ServiceId"]);
     }
 }

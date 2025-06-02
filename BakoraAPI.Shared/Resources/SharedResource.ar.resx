@@ -186,9 +186,6 @@
   <data name="ServiceDescriptionEn" xml:space="preserve">
     <value>وصف الخدمة باللغة الإنجليزية مطلوب.</value>
   </data>
-  <data name="ServiceId" xml:space="preserve">
-    <value>معرف الخدمة مطلوب.</value>
-  </data>
   <data name="ServiceTitleAr" xml:space="preserve">
     <value>عنوان الخدمة باللغة العربية مطلوب.</value>
   </data>

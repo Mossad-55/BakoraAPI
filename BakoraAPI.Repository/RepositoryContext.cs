@@ -26,4 +26,6 @@ public class RepositoryContext : IdentityDbContext<User, IdentityRole<Guid>, Gui
     //DbSets
     public DbSet<Admin>? Admins { get; set; }
     public DbSet<Provider>? Providers { get; set; }
+    public DbSet<Requester>? Requesters { get; set; }
+    public DbSet<Service>? Services { get; set; }
 }

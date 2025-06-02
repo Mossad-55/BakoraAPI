@@ -122,5 +122,7 @@ public static class ServiceExtension
         services.AddValidatorsFromAssemblyContaining<ProviderUpdateDtoValidator>();
         services.AddValidatorsFromAssemblyContaining<RequesterUpdateDtoValidator>();
         services.AddValidatorsFromAssemblyContaining<RequesterRegisterDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<ServiceUpdateDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<ServiceCreateDtoValidator>();
     }
 }

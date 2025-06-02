@@ -180,4 +180,19 @@
   <data name="RoleInvalid" xml:space="preserve">
     <value>يجب أن يكون الدور أحد التالي: Admin، Requester، Provider.</value>
   </data>
+  <data name="ServiceDescriptionAr" xml:space="preserve">
+    <value>وصف الخدمة باللغة العربية مطلوب.</value>
+  </data>
+  <data name="ServiceDescriptionEn" xml:space="preserve">
+    <value>وصف الخدمة باللغة الإنجليزية مطلوب.</value>
+  </data>
+  <data name="ServiceId" xml:space="preserve">
+    <value>معرف الخدمة مطلوب.</value>
+  </data>
+  <data name="ServiceTitleAr" xml:space="preserve">
+    <value>عنوان الخدمة باللغة العربية مطلوب.</value>
+  </data>
+  <data name="ServiceTitleEn" xml:space="preserve">
+    <value>عنوان الخدمة باللغة الإنجليزية مطلوب.</value>
+  </data>
 </root>

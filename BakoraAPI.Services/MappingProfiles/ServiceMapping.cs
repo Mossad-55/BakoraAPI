@@ -34,6 +34,7 @@ public static class ServiceMapping
 
         return new ServiceDto
         {
+            Id = service.Id,
             DescriptionAr = service.DescriptionAr,
             TitleAr = service.TitleAr,
             DescriptionEn = service.DescriptionEn,

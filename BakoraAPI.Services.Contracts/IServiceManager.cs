@@ -6,4 +6,5 @@ public interface IServiceManager
     IProviderService ProviderService { get; }
     IRequesterService RequesterService { get; }
     IServiceInterface ServiceInterface { get; }
+    IOrderInterface OrderInterface { get; }
 }

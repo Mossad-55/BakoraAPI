@@ -7,6 +7,6 @@ public interface IRepositoryManager
     IProviderRepository Provider { get; }
     IRequesterRepository Requester { get; }
     IServiceRepository Service { get; }
-        
+    IOrderRepository Order { get; }
     Task SaveChanges();
 }

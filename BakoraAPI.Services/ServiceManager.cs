@@ -9,6 +9,8 @@ public class ServiceManager : IServiceManager
     private readonly Lazy<IProviderService> _providerService;
     private readonly Lazy<IRequesterService> _requesterService;
     private readonly Lazy<IServiceInterface> _serviceInterface;
+    private readonly Lazy<IOrderInterface> _orderInterface;
+
 
     public ServiceManager(IRepositoryManager repositoryManager)
     {
@@ -16,10 +18,14 @@ public class ServiceManager : IServiceManager
         _providerService = new Lazy<IProviderService>(() => new ProviderService(repositoryManager));
         _requesterService = new Lazy<IRequesterService>(() => new RequesterService(repositoryManager));
         _serviceInterface = new Lazy<IServiceInterface>(() => new ServiceInterface(repositoryManager));
+        _orderInterface = new Lazy<IOrderInterface>(() => new OrderInterface(repositoryManager));
+
     }
 
     public IAdminService AdminService => _adminService.Value;
     public IProviderService ProviderService => _providerService.Value;
     public IRequesterService RequesterService => _requesterService.Value;
     public IServiceInterface ServiceInterface => _serviceInterface.Value;
+    public IOrderInterface OrderInterface => _orderInterface.Value;
+
 }

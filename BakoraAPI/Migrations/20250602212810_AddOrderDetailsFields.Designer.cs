@@ -4,6 +4,7 @@ using BakoraAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakoraAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20250602212810_AddOrderDetailsFields")]
+    partial class AddOrderDetailsFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +32,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Cart", b =>
@@ -67,7 +70,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Medicines", b =>
@@ -112,7 +115,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medicines", (string)null);
+                    b.ToTable("Medicines");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Order", b =>
@@ -159,7 +162,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.OrderItems", b =>
@@ -197,7 +200,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasIndex("OrderId1");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Provider", b =>
@@ -225,7 +228,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Providers", (string)null);
+                    b.ToTable("Providers");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Requester", b =>
@@ -253,7 +256,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Requesters", (string)null);
+                    b.ToTable("Requesters");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.Service", b =>
@@ -276,7 +279,7 @@ namespace BakoraAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("BakoraAPI.Entities.Entities.User", b =>

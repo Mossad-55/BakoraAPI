@@ -1,6 +1,7 @@
 ﻿using BakoraAPI.Entities.Entities;
 using BakoraAPI.Presentation.ActionFilters;
 using BakoraAPI.Services.Contracts;
+using BakoraAPI.Shared.DTOs.Order;
 using BakoraAPI.Shared.DTOs.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,19 +35,31 @@ public class OrderController : ControllerBase
 
         return Ok(order);
     }
+   
     [HttpPost]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    //[ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateOrderAsync([FromBody] Order order)
     {
-        await _services.OrderInterface.CreateOrderAsync(order, false);
-
-        return StatusCode(201, new { message = "Created new service successfully" });
+        if (order == null)
+            return BadRequest("Order object is null.");
+        try
+        {
+            await _services.OrderInterface.CreateOrderAsync(order, false);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message, details = ex.InnerException?.Message });
+        }
+        return StatusCode(201, new { message = "Created new order successfully" });
     }
 
     [HttpPut("{id:guid}")]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> UpdateOrderAsync(Guid id, [FromBody]Order order)
+    //[ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> UpdateOrderAsync(Guid id, [FromBody] OrderDTO order)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         await _services.OrderInterface.UpdateOrderAsync(id, order, true);
 
         return NoContent();

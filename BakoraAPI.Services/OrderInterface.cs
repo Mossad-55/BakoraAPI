@@ -3,8 +3,7 @@ using BakoraAPI.Entities.Entities;
 using BakoraAPI.Entities.Exceptions;
 using BakoraAPI.Services.Contracts;
 using BakoraAPI.Services.MappingProfiles;
-using BakoraAPI.Shared.DTOs.Admin;
-using BakoraAPI.Shared.DTOs.Service;
+using BakoraAPI.Shared.DTOs.Order;
 
 namespace BakoraAPI.Services;
 
@@ -26,17 +25,17 @@ internal sealed class OrderInterface : IOrderInterface
 
     public async Task DeleteOrderAsync(Guid id, bool trackChanges)
     {
-        var orderEntity = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new ServiceNotFoundException(id);
+        var orderEntity = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new OrderNotFoundException(id);
 
         _repository.Order.DeleteOrderAsync(orderEntity);
 
         await _repository.SaveChanges();
     }
-    public async Task UpdateOrderAsync(Guid id, Order order, bool trackChanges)
+    public async Task UpdateOrderAsync(Guid id, OrderDTO order, bool trackChanges)
     {
-        var orderEntity = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new ServiceNotFoundException(id);
-
-
+        var orderEntity = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new OrderNotFoundException(id);
+        orderEntity.UpdateEntity(order);
+ 
         _repository.Order.UpdateOrderAsync(orderEntity);
 
         await _repository.SaveChanges();
@@ -50,7 +49,7 @@ internal sealed class OrderInterface : IOrderInterface
 
     public async Task<Order?> GetByIdAsync(Guid id, bool trackChanges)
     {
-        var orderEntitiy = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new UserNotFoundException(id);
+        var orderEntitiy = await _repository.Order.GetOrderAsync(id, trackChanges) ?? throw new OrderNotFoundException(id);
 
 
         return orderEntitiy;

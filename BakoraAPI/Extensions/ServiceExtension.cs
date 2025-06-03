@@ -33,8 +33,9 @@ public static class ServiceExtension
     // Configure Sql Connection
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<RepositoryContext>(opts =>
-        opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
-
+        //opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+             opts.UseSqlServer(configuration.GetConnectionString("smarterConnection"),
+    sqlOptions => sqlOptions.EnableRetryOnFailure()));
     // Configure Identity
     public static void ConfigureIdentity(this IServiceCollection services)
     {

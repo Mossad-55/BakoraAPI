@@ -11,7 +11,7 @@ namespace BakoraAPI.Entities.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string OrderNo { get; set; } = null!;
-        public decimal OrderTotal { get; set; }
+        public decimal? OrderTotal { get; set; }
         public string OrderStatus { get; set; } = null!;
         public string ServiceType { get; set; } = null!;       
         public string? DeliveryAddress { get; set; }           

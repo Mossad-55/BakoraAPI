@@ -15,8 +15,7 @@ internal sealed class OrderRepository : RepositoryBase<Order>, IOrderRepository
     public void DeleteOrderAsync(Order order) => Delete(order);
     public void UpdateOrderAsync(Order Order) => Update(Order);
     public async Task<Order> GetOrderAsync(Guid id, bool trackChanges) =>
-        await FindByCondition(a => a.UserId == id, trackChanges)
-        .Include(a => a.User)
+        await FindByCondition(s => s.Id == id, trackChanges)
         .SingleOrDefaultAsync();
 
     public Task<List<Order>> GetAllOrdersAsync(bool trackChanges) =>

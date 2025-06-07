@@ -4,7 +4,9 @@ using BakoraAPI.Shared.DTOs.Admin;
 using BakoraAPI.Shared.DTOs.Provider;
 using BakoraAPI.Shared.DTOs.Requester;
 using BakoraAPI.Shared.DTOs.UserDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BakoraAPI.Presentation.Controllers;
 
@@ -142,8 +144,11 @@ public class AuthenticationController : ControllerBase
 
     [HttpPut("update-admin")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateAdmin([FromForm] AdminUpdateDto dto)
     {
+        dto.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         // Handling Profile Picture Upload
         if(dto.ProfilePicture != null)
         {
@@ -185,8 +190,11 @@ public class AuthenticationController : ControllerBase
 
     [HttpPut("update-provider")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize(Roles = "Provider")]
     public async Task<IActionResult> UpdateProvider([FromForm] ProviderUpdateDto dto)
     {
+        dto.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         // Handling Profile Picture Upload
         if (dto.ProfilePicture != null)
         {
@@ -228,8 +236,11 @@ public class AuthenticationController : ControllerBase
 
     [HttpPut("update-requester")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize(Roles = "Requester")]
     public async Task<IActionResult> UpdateRequester([FromForm] RequesterUpdateDto dto)
     {
+        dto.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         // Handling Profile Picture Upload
         if (dto.ProfilePicture != null)
         {

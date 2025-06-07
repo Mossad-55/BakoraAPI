@@ -12,12 +12,12 @@ public static class UserMapper
         return new AdminDto
         {
             UserId = user.UserId,
-            FullNameEnglish = user.User.FullNameEn,
-            FullNameArabic = user.User.FullNameEn,
+            FullNameEn = user.User.FullNameEn,
+            FullNameAr = user.User.FullNameAr,
             Email = user.User.Email,
             PhoneNumber = user.User.PhoneNumber,
-            AddressEnglish = user.User.AddressEn,
-            AddressArabic = user.User.AddressAr,
+            AddressEn = user.User.AddressEn,
+            AddressAr = user.User.AddressAr,
             ProfilePictureUrl = user.User.ProfilePictureUrl
         };
     }

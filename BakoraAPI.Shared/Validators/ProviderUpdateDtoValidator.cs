@@ -53,10 +53,5 @@ public class ProviderUpdateDtoValidator : AbstractValidator<ProviderUpdateDto>
             .NotEmpty()
             .NotNull()
             .WithMessage(localizer["CommercialRegistrationDate"]);
-
-        RuleFor(X => X.UserId)
-            .NotEmpty()
-            .WithMessage(localizer["IdRequired"]);
-
     }
 }

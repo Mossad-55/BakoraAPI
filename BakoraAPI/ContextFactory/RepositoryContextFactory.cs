@@ -14,7 +14,7 @@ public class RepositoryContextFactory : IDesignTimeDbContextFactory<RepositoryCo
             .Build();
 
         var builder = new DbContextOptionsBuilder<RepositoryContext>()
-            .UseSqlServer(configuration.GetConnectionString("smarterConnection"),
+            .UseSqlServer(configuration.GetConnectionString("sqlConnection"),
             b => b.MigrationsAssembly("BakoraAPI"));
 
         return new RepositoryContext(builder.Options);

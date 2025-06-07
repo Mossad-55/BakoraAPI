@@ -8,10 +8,6 @@ public class AdminUpdateDtoValidator : AbstractValidator<AdminUpdateDto>
 {
     public AdminUpdateDtoValidator(IStringLocalizer<SharedResource> localizer)
     {
-        RuleFor(X => X.UserId)
-            .NotEmpty()
-            .WithMessage(localizer["IdRequired"]);
-
         RuleFor(x => x.FullNameEn)
             .NotEmpty()
             .WithMessage(localizer["FullNameRequired"]);

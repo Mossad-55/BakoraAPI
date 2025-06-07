@@ -1,10 +1,12 @@
 ﻿using BakoraAPI.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BakoraAPI.Presentation.Controllers;
 
 [Route("api/admins")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class AdminController : ControllerBase
 {
     private readonly IServiceManager _services;

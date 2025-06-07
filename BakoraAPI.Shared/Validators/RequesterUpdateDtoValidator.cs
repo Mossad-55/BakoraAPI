@@ -53,9 +53,5 @@ public class RequesterUpdateDtoValidator : AbstractValidator<RequesterUpdateDto>
             .NotEmpty()
             .NotNull()
             .WithMessage(localizer["CommercialRegistrationDate"]);
-
-        RuleFor(X => X.UserId)
-            .NotEmpty()
-            .WithMessage(localizer["IdRequired"]);
     }
 }

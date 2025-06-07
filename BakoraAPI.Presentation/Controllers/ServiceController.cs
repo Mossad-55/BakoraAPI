@@ -1,6 +1,7 @@
 ﻿using BakoraAPI.Presentation.ActionFilters;
 using BakoraAPI.Services.Contracts;
 using BakoraAPI.Shared.DTOs.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BakoraAPI.Presentation.Controllers;
@@ -31,6 +32,7 @@ public class ServiceController : ControllerBase
 
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateServiceAsync([FromBody] ServiceCreateDto dto)
     {
         await _service.ServiceInterface.CreateServiceAsync(dto, false);
@@ -40,6 +42,7 @@ public class ServiceController : ControllerBase
 
     [HttpPut("{id:guid}")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateServiceAsync(Guid id, [FromBody] ServiceUpdateDto dto)
     {
         await _service.ServiceInterface.UpdateServiceAsync(id, dto, true);
@@ -48,6 +51,7 @@ public class ServiceController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteServiceAsync(Guid id)
     {
         await _service.ServiceInterface.DeleteServiceAsync(id, false);

@@ -1,10 +1,12 @@
 ﻿using BakoraAPI.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BakoraAPI.Presentation.Controllers;
 
 [Route("api/requesters")]
 [ApiController]
+[Authorize(Roles = "Admin, Requester")]
 public class RequesterController : ControllerBase
 {
     private readonly IServiceManager _service;

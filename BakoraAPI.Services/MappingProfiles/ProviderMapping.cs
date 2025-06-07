@@ -41,6 +41,7 @@ public static class ProviderMapping
             UserId = provider.UserId,
             FullNameEn = provider.User.FullNameEn,
             FullNameAr = provider.User.FullNameAr,
+            JoiningDate = provider.User.JoiningDate?.ToString("MMM dd, yyyy"),
             Email = provider.User.Email,
             PhoneNumber = provider.User.PhoneNumber,
             AddressEn = provider.User.AddressEn,
@@ -51,7 +52,8 @@ public static class ProviderMapping
             InstitutionTypeAr = provider.InstitutionTypeAr,
             CommercialRegistrationNumber = provider.CommercialRegistrationNumber,
             InstitutionNameEn = provider.InstitutionNameEn,
-            InstitutionTypeEn = provider.InstitutionTypeEn
+            InstitutionTypeEn = provider.InstitutionTypeEn,
+            IsActive = provider.User.IsActive
         };
     }
 

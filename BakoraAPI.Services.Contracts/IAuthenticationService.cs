@@ -17,4 +17,5 @@ public interface IAuthenticationService
     Task<LoginResponseDto> LoginUser(LoginUserDto dto);
     Task<TokenDto> GenerateToken(bool populateExpiry);
     Task<TokenDto> RefreshToken(TokenDto tokenDto);
+    Task<bool> BlockUserAsync(Guid userId);
 }

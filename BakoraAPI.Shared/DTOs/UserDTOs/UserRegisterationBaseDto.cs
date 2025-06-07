@@ -14,7 +14,7 @@ public record UserRegisterationBaseDto
     public string? ConfirmPassword { get; set; }
     public string? AddressEn { get; set; }
     public string? AddressAr { get; set; }
-
+    public DateTime? JoiningDate { get; set; } = DateTime.UtcNow;
     public IFormFile? ProfilePicture { get; set; }
     public string? ProfilePictureUrl { get; set; }
     public string? Role { get; set; }

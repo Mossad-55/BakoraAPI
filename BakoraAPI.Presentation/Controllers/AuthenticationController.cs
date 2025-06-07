@@ -279,4 +279,16 @@ public class AuthenticationController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("block-user/{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> BlockUser(Guid id)
+    {
+        var result = await _authService.AuthenticationService.BlockUserAsync(id);
+
+        if(!result)
+            return Ok(new { message = "User has been blocked successfully." });
+
+        return Ok(new { message = "User has been unblocked successfully." });
+    }
 }

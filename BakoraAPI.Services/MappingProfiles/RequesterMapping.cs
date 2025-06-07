@@ -42,6 +42,7 @@ public static class RequesterMapping
             FullNameEn = requester.User.FullNameEn,
             FullNameAr = requester.User.FullNameAr,
             Email = requester.User.Email,
+            JoiningDate = requester.User.JoiningDate?.ToString("MMM dd, yyyy"),
             PhoneNumber = requester.User.PhoneNumber,
             AddressEn = requester.User.AddressEn,
             AddressAr = requester.User.AddressAr,
@@ -51,7 +52,8 @@ public static class RequesterMapping
             InstitutionTypeAr = requester.InstitutionTypeAr,
             CommercialRegistrationNumber = requester.CommercialRegistrationNumber,
             InstitutionNameEn = requester.InstitutionNameEn,
-            InstitutionTypeEn = requester.InstitutionTypeEn
+            InstitutionTypeEn = requester.InstitutionTypeEn,
+            IsActive = requester.User.IsActive
         };
     }
 

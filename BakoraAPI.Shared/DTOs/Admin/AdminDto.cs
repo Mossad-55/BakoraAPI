@@ -10,4 +10,7 @@ public record AdminDto
     public string? AddressEn { get; set; }
     public string? AddressAr { get; set; }
     public string? ProfilePictureUrl { get; set; }
+    public string? JoiningDate { get; set; }
+    public bool? IsActive { get; set; }
 }
+    

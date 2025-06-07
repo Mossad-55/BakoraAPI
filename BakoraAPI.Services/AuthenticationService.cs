@@ -54,7 +54,11 @@ internal sealed class AuthenticationService : IAuthenticationService
 
         var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-        return new TokenDto(accessToken, refreshToken);
+        return new TokenDto
+        {
+            AccessToken = accessToken,
+            RefreshToken = refreshToken,
+        };
     }
 
     public async Task<LoginResponseDto> LoginUser(LoginUserDto dto)
@@ -66,10 +70,9 @@ internal sealed class AuthenticationService : IAuthenticationService
          * if (!await _userManager.IsEmailConfirmedAsync(_user))
             throw new EmailNotConfirmedException(dto.Email);*/
 
-        /* Implement if the use got blocked or not .
-         if(_user.IsBlocked)
+
+         if(!_user.IsActive)
             throw new UserBlockedException(dto.Email);
-         */
 
         var result = await _userManager.CheckPasswordAsync(_user, dto.Password ?? string.Empty);
         if (!result)
@@ -209,6 +212,21 @@ internal sealed class AuthenticationService : IAuthenticationService
         var result = await _userManager.UpdateAsync(userEntity);
 
         return result;
+    }
+
+
+    public async Task<bool> BlockUserAsync(Guid userId)
+    {
+        var userEntity = await _userManager.FindByIdAsync(userId.ToString()) ?? throw new UserNotFoundException(userId);
+
+        if (userEntity.IsActive)
+            userEntity.IsActive = false;
+        else
+            userEntity.IsActive = true;
+
+        await _userManager.UpdateAsync(userEntity);
+
+        return userEntity.IsActive;
     }
 
     // Private Functions

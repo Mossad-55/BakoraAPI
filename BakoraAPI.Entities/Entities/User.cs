@@ -12,6 +12,8 @@ public class User : IdentityUser<Guid>
 
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiryDate { get; set; }
+    public DateTime? JoiningDate { get; set; }
+    public bool IsActive { get; set; }
 
     // Roles Profiles
     public virtual Admin? Admin { get; set; }

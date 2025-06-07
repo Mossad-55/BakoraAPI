@@ -14,11 +14,13 @@ public static class UserMapper
             UserId = user.UserId,
             FullNameEn = user.User.FullNameEn,
             FullNameAr = user.User.FullNameAr,
+            JoiningDate = user.User.JoiningDate?.ToString("MMM dd, yyyy"),
             Email = user.User.Email,
             PhoneNumber = user.User.PhoneNumber,
             AddressEn = user.User.AddressEn,
             AddressAr = user.User.AddressAr,
-            ProfilePictureUrl = user.User.ProfilePictureUrl
+            ProfilePictureUrl = user.User.ProfilePictureUrl,
+            IsActive = user.User.IsActive,
         };
     }
 

@@ -20,7 +20,9 @@ public static class UserMapping
             FullNameEn = dto.FullNameEn,
             FullNameAr = dto.FullNameAr,
             PhoneNumber = dto.PhoneNumber,
-            ProfilePictureUrl = dto.ProfilePictureUrl
+            JoiningDate = dto.JoiningDate,
+            ProfilePictureUrl = dto.ProfilePictureUrl,
+            IsActive = true
         };
     }
 
@@ -37,7 +39,9 @@ public static class UserMapping
             FullNameEn = dto.FullNameEn,
             FullNameAr = dto.FullNameAr,
             PhoneNumber = dto.PhoneNumber,
-            ProfilePictureUrl = dto.ProfilePictureUrl
+            JoiningDate = dto.JoiningDate,
+            ProfilePictureUrl = dto.ProfilePictureUrl,
+            IsActive = true
         };
     }
 
@@ -54,7 +58,9 @@ public static class UserMapping
             FullNameEn = dto.FullNameEn,
             FullNameAr = dto.FullNameAr,
             PhoneNumber = dto.PhoneNumber,
-            ProfilePictureUrl = dto.ProfilePictureUrl
+            JoiningDate = dto.JoiningDate,
+            ProfilePictureUrl = dto.ProfilePictureUrl,
+            IsActive = true
         };
     }
 

@@ -11,6 +11,7 @@ public record ProviderDto
     public string? PhoneNumber { get; set; }
     public string? AddressEn { get; set; }
     public string? AddressAr { get; set; }
+    public string? JoiningDate { get; set; }
     public string? ProfilePictureUrl { get; set; }
     public string? InstitutionNameEn { get; set; }
     public string? InstitutionNameAr { get; set; }
@@ -18,4 +19,5 @@ public record ProviderDto
     public string? InstitutionTypeAr { get; set; }
     public string? CommercialRegistrationNumber { get; set; }
     public string? CommercialRegistrationDate { get; set; }
+    public bool? IsActive { get; set; }
 }
